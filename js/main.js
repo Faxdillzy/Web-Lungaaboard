@@ -38,11 +38,11 @@
   var tabs = $('tabs');
   if (tabs) {
     var D = [
-      { k: 'YUL', kota: 'Montréal', neg: 'Québec', jalur: 'Studi · Kerja', ujian: 'TCF Canada / TEF Canada', cat: 'Québec punya sistem imigrasi sendiri dan bahasa Prancis sebagai bahasa utama. Cek aturan terbaru.' },
-      { k: 'YQB', kota: 'Québec', neg: 'Ontario', jalur: 'Studi · Kerja', ujian: 'TCF / TEF, DELF', cat: 'Kota yang mayoritas berbahasa Prancis; cocok untuk belajar bahasa sambil menjalani hidup sehari-hari.' },
-      { k: 'YOW', kota: 'Ottawa', neg: 'Ontario', jalur: 'Kerja · Studi', ujian: 'TCF Canada / TEF Canada', cat: 'Di luar Québec, program Francophone Mobility memungkinkan perusahaan merekrut pekerja berbahasa Prancis tanpa LMIA, dengan syarat tertentu.' },
-      { k: 'YQM', kota: 'Moncton', neg: 'New Brunswick', jalur: 'Kerja · Studi', ujian: 'TCF Canada / TEF Canada', cat: 'New Brunswick adalah provinsi resmi dwibahasa dengan komunitas Acadie yang kuat.' },
-      { k: 'YWG', kota: 'Winnipeg', neg: 'Manitoba', jalur: 'Kerja · Studi', ujian: 'TCF Canada / TEF Canada', cat: 'Komunitas francophone ada di sekitar Saint-Boniface. Cek peluang dan syarat tiap provinsi.' }
+      { k: 'YUL', kota: 'Montréal', neg: 'Québec', jalur: 'Francophone Mobility', ujian: 'TCF Canada / TEF Canada', cat: 'Québec punya sistem imigrasi sendiri dan bahasa Prancis sebagai bahasa utama. Cek aturan terbaru.' },
+      { k: 'YQB', kota: 'Québec', neg: 'Ontario', jalur: 'Francophone Mobility', ujian: 'TCF / TEF, DELF', cat: 'Kota yang mayoritas berbahasa Prancis; cocok untuk belajar bahasa sambil menjalani hidup sehari-hari.' },
+      { k: 'YOW', kota: 'Ottawa', neg: 'Ontario', jalur: 'Francophone Mobility', ujian: 'TCF Canada / TEF Canada', cat: 'Di luar Québec, program Francophone Mobility memungkinkan perusahaan merekrut pekerja berbahasa Prancis tanpa LMIA, dengan syarat tertentu.' },
+      { k: 'YQM', kota: 'Moncton', neg: 'New Brunswick', jalur: 'Francophone Mobility', ujian: 'TCF Canada / TEF Canada', cat: 'New Brunswick adalah provinsi resmi dwibahasa dengan komunitas Acadie yang kuat.' },
+      { k: 'YWG', kota: 'Winnipeg', neg: 'Manitoba', jalur: 'Francophone Mobility', ujian: 'TCF Canada / TEF Canada', cat: 'Komunitas francophone ada di sekitar Saint-Boniface. Cek peluang dan syarat tiap provinsi.' }
     ];
     var btns = D.map(function (d, i) {
       var b = document.createElement('button');
