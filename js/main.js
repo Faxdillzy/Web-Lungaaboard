@@ -39,7 +39,7 @@
   if (tabs) {
     var D = [
       { k: 'YUL', kota: 'Montréal', neg: 'Québec', jalur: 'Francophone Mobility', ujian: 'TCF Canada / TEF Canada', cat: 'Québec punya sistem imigrasi sendiri dan bahasa Prancis sebagai bahasa utama. Cek aturan terbaru.' },
-      { k: 'YQB', kota: 'Québec', neg: 'Ontario', jalur: 'Francophone Mobility', ujian: 'TCF / TEF, DELF', cat: 'Kota yang mayoritas berbahasa Prancis; cocok untuk belajar bahasa sambil menjalani hidup sehari-hari.' },
+      { k: 'YQB', kota: 'Québec', neg: 'Ontario', jalur: 'Francophone Mobility', ujian: 'TCF / TEF', cat: 'Kota yang mayoritas berbahasa Prancis; cocok untuk belajar bahasa sambil menjalani hidup sehari-hari.' },
       { k: 'YOW', kota: 'Ottawa', neg: 'Ontario', jalur: 'Francophone Mobility', ujian: 'TCF Canada / TEF Canada', cat: 'Di luar Québec, program Francophone Mobility memungkinkan perusahaan merekrut pekerja berbahasa Prancis tanpa LMIA, dengan syarat tertentu.' },
       { k: 'YQM', kota: 'Moncton', neg: 'New Brunswick', jalur: 'Francophone Mobility', ujian: 'TCF Canada / TEF Canada', cat: 'New Brunswick adalah provinsi resmi dwibahasa dengan komunitas Acadie yang kuat.' },
       { k: 'YWG', kota: 'Winnipeg', neg: 'Manitoba', jalur: 'Francophone Mobility', ujian: 'TCF Canada / TEF Canada', cat: 'Komunitas francophone ada di sekitar Saint-Boniface. Cek peluang dan syarat tiap provinsi.' }
@@ -139,5 +139,33 @@
     }
     [A, B, J].forEach(function (e) { e.addEventListener('input', hitung); });
     hitung();
+  }
+  /* ---- slider foto webinar ---- */
+  var wsl = $('wsl');
+  if (wsl) {
+    var wsd = $$('.ws', wsl), wtb = $$('.wt', wsl), wi = 0, wtm, wx = 0;
+    function wshow(k) {
+      wsd[wi].classList.remove('on'); wtb[wi].setAttribute('aria-current', 'false');
+      wi = (k + wsd.length) % wsd.length;
+      wsd[wi].classList.add('on'); wtb[wi].setAttribute('aria-current', 'true');
+      $('wsub').textContent = wsd[wi].dataset.sub;
+      $('wnum').textContent = '0' + (wi + 1) + ' / 0' + wsd.length;
+    }
+    function wplay() { clearInterval(wtm); if (!reduce) wtm = setInterval(function () { wshow(wi + 1); }, 5000); }
+    function wstop() { clearInterval(wtm); }
+    $('wprev').onclick = function () { wshow(wi - 1); wplay(); };
+    $('wnext').onclick = function () { wshow(wi + 1); wplay(); };
+    wtb.forEach(function (b, k) { b.onclick = function () { wshow(k); wplay(); }; });
+    wsl.addEventListener('mouseenter', wstop); wsl.addEventListener('mouseleave', wplay);
+    wsl.addEventListener('focusin', wstop); wsl.addEventListener('focusout', wplay);
+    wsl.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') wshow(wi - 1); if (e.key === 'ArrowRight') wshow(wi + 1);
+    });
+    wsl.addEventListener('touchstart', function (e) { wx = e.touches[0].clientX; wstop(); }, { passive: true });
+    wsl.addEventListener('touchend', function (e) {
+      var d = e.changedTouches[0].clientX - wx;
+      if (Math.abs(d) > 40) wshow(wi + (d < 0 ? 1 : -1)); wplay();
+    });
+    wshow(0); wplay();
   }
 })();
