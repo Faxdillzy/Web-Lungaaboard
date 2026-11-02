@@ -128,22 +128,41 @@
     }
     show(2);
 
-    var A = $('c-a'), B = $('c-b'), J = $('c-j'), hrs = [0].concat(L.map(function (x) { return x[3]; }));
-    ['Belum pernah'].concat(L.map(function (x) { return x[0]; })).forEach(function (n, i) {
-      if (i < 5) A.add(new Option(i === 0 ? 'Belum pernah belajar' : n, i));
-      if (i > 0) B.add(new Option(n, i));
-    });
-    B.value = 3;
+    var K = [
+      { nama: 'Reguler', paket: [
+        { label: 'A1 – A2', bulan: 3 },
+        { label: 'A2 – B2 (30%)', bulan: 3 }
+      ] },
+      { nama: 'Private 1 on 1', paket: [
+        { label: 'A1 – A2', bulan: 2 },
+        { label: 'B1 – B2', bulan: 2 },
+        { label: 'Persiapan B1 – TCF/TEF', bulan: 1.5 }
+      ] },
+      { nama: 'Private Group (min. 3 orang)', paket: [
+        { label: 'A1 – A2', bulan: 2 },
+        { label: 'B1 – B2', bulan: 2 },
+        { label: 'Persiapan B1 – TCF/TEF', bulan: 1.5 }
+      ] }
+    ];
+    var ck = $('c-kelas'), cp = $('c-paket');
+    K.forEach(function (k, i) { ck.add(new Option(k.nama, i)); });
     function hitung() {
-      $('c-jv').textContent = J.value;
-      var a = +A.value, b = +B.value, o = $('c-o'), n = $('c-n');
-      if (b <= a) { o.textContent = '—'; n.textContent = 'Pilih target yang lebih tinggi dari level sekarang.'; return; }
-      var jam = hrs[b] - hrs[a], mgg = Math.ceil(jam / J.value);
-      o.textContent = Math.max(1, Math.round(mgg / 4.345)) + ' bulan';
-      n.textContent = '± ' + jam + ' jam belajar, sekitar ' + mgg + ' minggu pada ' + J.value + ' jam per minggu.';
+      var k = K[+ck.value], p = k.paket[+cp.value];
+      if (!p) return;
+      var o = $('c-o'), n = $('c-n');
+      o.textContent = p.bulan === 1.5 ? '1,5 bulan' : p.bulan + ' bulan';
+      n.textContent = 'Program ' + k.nama + ' · ' + p.label + '.' +
+        (p.bulan === 1.5 ? ' Setara 1 bulan 2 minggu (± 6 minggu).' : '');
     }
-    [A, B, J].forEach(function (e) { e.addEventListener('input', hitung); });
-    hitung();
+    function isiPaket() {
+      var k = K[+ck.value];
+      cp.innerHTML = '';
+      k.paket.forEach(function (p, i) { cp.add(new Option(p.label, i)); });
+      hitung();
+    }
+    ck.addEventListener('change', isiPaket);
+    cp.addEventListener('change', hitung);
+    isiPaket();
   }
   /* ---- slider foto webinar ---- */
   var wsl = $('wsl');
