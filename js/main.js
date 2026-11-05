@@ -131,7 +131,7 @@
     var K = [
       { nama: 'Reguler', paket: [
         { label: 'A1 – A2', bulan: 3 },
-        { label: 'A2 – B2 (30%)', bulan: 3 }
+        { label: 'B1 – B2 (3%)', bulan: 3 }
       ] },
       { nama: 'Private 1 on 1', paket: [
         { label: 'A1 – A2', bulan: 2 },
